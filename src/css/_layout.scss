@@ -1,0 +1,605 @@
+@use "base" as *;
+@use "animations" as *;
+
+//Mixins
+
+@mixin article-heading {
+    margin: 2em 0;
+}
+
+@mixin box-shadow($x: 0, $y: 0px, $blur: 10px, $color: rgba(0, 0, 0, 0.5)) {
+    box-shadow: $x $y $blur $color;
+}
+
+@mixin btn-theme($light-theme: true) {
+    @if $light-theme {
+        background: $primary;
+    }
+
+    @else {
+        background: $secondary;
+    }
+}
+
+
+// Default styles för body och root
+
+body {
+    color: $text-light;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    background-color: $bg-light;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Styles för header, ger den fast höjd som ger plats för logga och navigationslänkar
+
+header {
+    height: 60px;
+    margin: 0;
+    top: 0;
+    position: static;
+    padding: 0 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100vw;
+    @include box-shadow(0, 0, 10px, rgba(0, 0, 0.5));
+    z-index: 1000;
+
+    #logoText {
+        color: $text-light;
+        text-decoration: none;
+        font-size: 1.75em;
+    }
+
+    // Knapp för att öppna nav-meny på enheter med mindre bredd
+
+    .menu-btn {
+        display: flex;
+        align-items: center;
+        padding: 8px 15px;
+        cursor: pointer;
+        border: none;
+        background-color: white;
+    }
+
+    .menu-icon {
+        margin-right: 10px;
+    }
+
+    .open {
+        margin: 0 1em;
+    }
+
+    .menu-btn:hover {
+        @include box-shadow(0, 0, 10px, rgba(0, 0, 0.4));
+
+    }
+
+    // Linjer som skapar hamburger-icon
+
+    .bars {
+        display: block;
+        width: 20px;
+        height: 3px;
+        background-color: black;
+        margin: 5px 0;
+    }
+
+    .close {
+        margin: 1em 1.5em;
+        padding: 10px 15px;
+    }
+
+    // Linjer som utgör knappen för att stänga ner hamburger-menyn
+
+    .cross1 {
+        width: 25px;
+        transform: rotate(45deg);
+        position: relative;
+        top: 5px;
+    }
+
+    .cross2 {
+        width: 25px;
+        transform: rotate(135deg);
+        position: relative;
+        top: -3px;
+    }
+
+}
+
+// Sätter nav-menyn på höger sida när den öppnas. Nestar även child-elements inom naven som listor och anchor element.
+
+nav {
+    @include box-shadow(0, 0, 10px, rgba(0, 0, 0.5));
+    font-size: 1.5em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 200px;
+    display: none;
+    background-color: $bg-light;
+    z-index: 9999;
+
+
+    ul {
+        width: 100%;
+        list-style-type: none;
+        text-align: center;
+        margin: 0 auto;
+        padding: 0;
+
+
+        li {
+            padding: 0.8em 0;
+            width: 100%;
+            color: $links-light;
+
+            a {
+                color: black;
+                text-decoration: none;
+                padding: 0 1em;
+
+                &:hover {
+                    animation: fadeIn 1s;
+                    animation-fill-mode: forwards;
+                }
+            }
+        }
+    }
+}
+
+// Grid som innehåller bilder av ved och text angående företaget
+
+#pictureGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    object-fit: contain;
+    justify-items: center;
+
+    picture img {
+        width: 100%;
+        border-radius: 1em;
+        @include box-shadow(0, 0, 10px, rgba(0, 0, 0.5));
+
+    }
+
+    // Använder id:s för att sortera elementen i griden 
+
+    #picture1 {
+        grid-area: 1/1/1/3;
+        padding: 20px;
+
+    }
+
+    #picture2 {
+        @extend #picture1;
+        grid-area: 3/2/3/4;
+    }
+
+    #text1 {
+        grid-area: 2/1/3/3;
+        padding: 5px 20px;
+        font-size: 1.125em;
+    }
+
+    #text2 {
+        @extend #text1;
+        grid-area: 4/2/4/4;
+    }
+}
+
+// Här har jag nestat massor av element från både index.html och sass.html. 
+
+main {
+    h1 {
+        text-align: center;
+        padding: 10px;
+        font-size: 1.75em;
+        margin-top: 1em;
+
+    }
+
+    .map-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #map {
+        height: 500px;
+        width: 80vw;
+        margin-bottom: 2em;
+    }
+
+    .map-container #pac-input {
+        margin: 4em 0 2em 0;
+        font-size: 1em;
+        padding: .5em;
+        border-radius: .5em;
+    }
+
+
+    .sass-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 2em;
+        align-items: center;
+
+        img {
+            width: 50%;
+            animation: pulse 4s infinite;
+        }
+    }
+
+    .img-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2em 0;
+
+        img {
+            border-radius: 1.25em;
+            width: 100%;
+        }
+
+        picture {
+            width: 80%;
+        }
+    }
+
+    h2 {
+        text-align: center;
+        margin: 1em 0;
+        font-size: 1.5em;
+    }
+
+    .text-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    ul {
+        width: 90%;
+        @include box-shadow(0, 0, 10px, rgba(0, 0, 0.1));
+        border-radius: 20px;
+
+        li {
+            font-size: 1.125em;
+            font-weight: 600;
+            padding: 15px;
+            list-style-type: none;
+
+            p {
+                font-size: 0.875em;
+                padding: 15px 0;
+                font-weight: 400;
+            }
+        }
+    }
+
+    #buyBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1em;
+        margin: 2em 0;
+        width: 100%;
+
+        p {
+            text-decoration: none;
+            color: $text-dark;
+            font-weight: 500;
+            @include btn-theme($light-theme: true);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.25em;
+            cursor: pointer;
+            animation: btnRotation 3s linear infinite alternate;
+
+            &:hover {
+                color: $secondary;
+            }
+        }
+    }
+
+    article {
+        h2 {
+            // Mixin
+            @include article-heading;
+        }
+
+        p {
+            font-size: 1.25em;
+            padding: 1em;
+            line-height: 1.4em;
+            margin: .5em 2em;
+        }
+
+        h3 {
+            // Använder extend för att slippa repetera kod
+            @extend h2;
+            margin: 2em 0;
+        }
+    }
+
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2em;
+    margin-top: 1em;
+
+    label {
+        font-size: 1.625em;
+        margin-bottom: .75em;
+    }
+
+    input {
+        width: 100%;
+        padding: .5em;
+        margin: 1em 0;
+        font-size: 1.25em;
+    }
+
+    input[type="submit" i] {
+        width: 50%;
+        font-size: 1.4em;
+        background-color: $bg-light;
+        border-radius: 1em;
+        border: none;
+
+        &:hover {
+            background-color: darken($bg-light, 20%);
+            transition: 1s;
+            cursor: pointer;
+        }
+
+    }
+
+    .active {
+        animation: rotateBtn 1.4s forwards infinite;
+
+    }
+
+}
+
+footer {
+    background-color: $footer-light;
+    color: $text-light;
+
+    // Mixin
+    @include box-shadow(0, 0, 10px, rgba(0, 0, 0.5));
+
+    h5 {
+        font-size: 1.5em;
+        text-align: center;
+        padding: 0.5em;
+        margin-top: 1em;
+    }
+
+    p {
+        padding: 0.5em;
+    }
+
+}
+
+// Media-query för skärmar med bredd under 992px
+
+@media only screen and (min-width:992px) {
+    header {
+        padding: 0 3em;
+        position: relative;
+        height: 80px;
+
+        #logoText {
+            font-size: 2.75em;
+            margin-left: 0.5em;
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        #open-menu {
+            display: none !important;
+        }
+
+
+        nav {
+            text-align: center;
+            display: block !important;
+
+            // Tar bort box-shadow från navbaren när den inte sitter på högersidan
+            box-shadow: 0 0px 0px;
+            height: auto;
+            font-size: 1.55em;
+            width: auto;
+            position: absolute;
+            bottom: 0;
+
+
+            ul {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            li {
+                display: inline;
+                position: relative;
+                bottom: 0;
+                font-size: 1.125em;
+            }
+        }
+    }
+
+    #pictureGrid {
+        grid-gap: 2em;
+        overflow: hidden;
+        height: 1600px;
+        margin-top: 3em;
+
+        #text1,
+        #text2 {
+            font-size: 2em;
+            animation: textSize 6s infinite alternate;
+        }
+    }
+
+    main {
+
+        #buyBtn {
+            p {
+                font-size: 2.5em;
+                padding: 1.75em;
+                margin: 2em 0;
+
+                &:hover {
+                    color: lighten($secondary, 20%);
+                }
+            }
+        }
+
+        #map {
+            width: 65vw;
+            height: 700px;
+
+        }
+
+        .map-container #pac-input {
+            padding: .75em;
+            font-size: 1.25em;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-top: 1.5em;
+            padding: 1.125em;
+        }
+
+        h2 {
+            font-size: 2.5em;
+        }
+
+        ul {
+            li {
+                font-size: 1.625em;
+            }
+        }
+
+        article {
+            p {
+                font-size: 1.5em;
+                line-height: 1.6;
+            }
+        }
+
+        .sass-wrapper {
+            padding: 5em;
+
+
+            img {
+                width: 25%;
+            }
+        }
+
+    }
+
+
+
+    footer {
+        h5 {
+            font-size: 2.25em;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+    }
+}
+
+@media only screen and (min-width:1501px) {
+    main {
+
+        .map-container #pac-input {
+            padding: 1em;
+            font-size: 1.5em;
+        }
+
+        #map {
+            width: 50vw;
+        }
+
+        article p {
+            font-size: 1.75em;
+            padding: 2em;
+        }
+    }
+}
+
+// Styles för användare som använder dark-theme på sin webbläsare
+
+@media(prefers-color-scheme:dark) {
+    body {
+        background-color: $bg-dark;
+        color: $text-dark;
+    }
+
+    footer {
+        background-color: $footer-dark;
+        color: $footer-text-dark;
+    }
+
+    header {
+        @include box-shadow(0, 0px, 10px, rgba(0, 0, 0.5));
+        background: $header-dark;
+
+        .open,
+        .close {
+            background: $header-dark;
+        }
+
+        .bars {
+            background-color: white;
+        }
+
+        #logoText {
+            color: $text-dark;
+        }
+    }
+
+    nav {
+        background: $header-dark;
+
+        ul {
+            li {
+                a {
+                    color: $text-dark;
+                }
+
+            }
+        }
+    }
+
+    #buyBtn {
+        p {
+            @include btn-theme($light-theme: false);
+        }
+    }
+
+}

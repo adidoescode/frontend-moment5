@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sass</title>
+    <link rel="stylesheet" href="css/main.scss">
+    <link rel="shortcut icon" href="bilagor/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <script type="module" src="js/app.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" id="logoText">
+            J<u>a</u>ngr<u>e</u>n
+        </a>
+        <button class="menu-btn open" id="open-menu">
+            <span class="menu-icon">
+                <span class="bars"></span>
+                <span class="bars"></span>
+                <span class="bars"></span>
+            </span>
+        </button>
+        <nav id="nav-menu">
+
+            <button class="menu-btn close" id="close-menu">
+                <span class="menu-icon">
+                    <span class="bars cross1"></span>
+                    <span class="bars cross2"></span>
+                </span>
+            </button>
+            <ul>
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="#">Ved</a></li>
+                <li><a href="karta.html">Karta</a></li>
+                <li><a href="diagram.html">Diagram</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Introduktion till SASS</h1>
+        <div class="sass-wrapper">
+            <img src="bilagor/sass-dark.png" alt="">
+        </div>
+        <article>
+            <p>
+                SASS är en kraftfull och användbar CSS-preprocessor som hjälper programmera att skriva mer kompakt,
+                lättförståelig och återanvändbar kod. Det finns många fördelar som variabler, mixins, nesting, if/else
+                satser osv.
+            </p>
+            <u>
+                <h2>Fördelar med SASS</h2>
+            </u>
+            <div class="text-wrapper">
+                <ul>
+                    <li>⭕ Mixins ger möjlighet till att återvända kod</li>
+                    <li>⭕ Nesting används för att ge koden bättre struktur</li>
+                    <li>⭕ @use för att dela upp SASS-filer som utgör olika områden för bättre struktur</li>
+                    <li>⭕ Funktioner och loopar ger möjlighet till bättre produktivitet samt effektivitet</li>
+                </ul>
+            </div><u>
+                <h3>Nackdelar med SASS</h3>
+            </u>
+            <div class="text-wrapper">
+                <ul>
+                    <li>⭕ Svår inlärningskurva</li>
+                    <li>⭕ Kompilering krävs för att koden ska tolkas av webbläsaren</li>
+                    <li>⭕ Kan backfirea då koden kan bli ännu mer komplex vid onödiga variabler/nestings/mixins etc.
+                    </li>
+                </ul>
+            </div>
+        </article>
+    </main>
+    <footer>
+        <h5>Jangren Ved</h5>
+        <br>
+        <p>✉️ fiktivjangren@gmail.com</p>
+        <br>
+        <p>☎️ 076-xxxxxxx</p>
+        <br>
+        <p>🗺️ Bäckefors, Arket - 47172</p>
+        <br>
+        <hr>
+        <br>
+        <p>© 2024 Jangren Ved</p>
+        <br>
+    </footer>
+</body>
+
+</html>
