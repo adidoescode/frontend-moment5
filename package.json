@@ -5,7 +5,7 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel --open chrome",
-    "build": "parcel build --open chrome"
+    "build": "parcel build"
   },
   "keywords": [],
   "author": "",
